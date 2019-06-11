@@ -1,0 +1,146 @@
+body {
+  background-color: #fbe8a6;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+button:focus, input:focus {
+  outline: none;
+}
+
+#home {
+  display: flex;
+}
+
+#home-left {
+  width: 70%;
+  margin-right: 1rem;
+}
+
+#home-right {
+  width: 30%;
+}
+
+.navbar {
+  background-color: #f4976c;
+}
+
+.navbar > .navbar-links {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 18rem;
+  margin-right: 18rem;
+}
+
+.navbar > .navbar-links > h1 {
+  cursor: pointer;
+}
+
+.navbar > .navbar-links > h1:hover {
+  color: white;
+}
+
+.container {
+  background-color: #b4dfe5;
+  border-radius: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1rem;
+}
+
+
+.center {
+  margin-left: 18rem;
+  margin-right: 18rem;
+}
+
+.center-wide {
+  margin-left: 14rem;
+  margin-right: 14rem;
+}
+
+.spacer {
+  width: 1rem;
+  flex-grow: 1;
+}
+
+.delete-button {
+  background-color: #d2fdff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #f4976c;
+  color: white;
+}
+
+.delete-button:active {
+  background-color: #dd855d;
+  color: black;
+}
+
+#message-form > div {
+  background-color: #303c6c;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding: 1rem;
+}
+
+#message-form > div > input {
+  border: 2px solid #f4976c;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  padding: 0.4rem 0.6rem;
+}
+
+#message-form > div > input[type=text] {
+  flex-grow: 10;
+  min-width: 5rem;
+}
+
+#message-form > div > input.button {
+  background-color: #d2fdff;
+  flex-grow: 1;
+  margin-left: 0.5rem;
+}
+
+#message-form > div > input.button:hover {
+  background-color: #f4976c;
+  border: 2px solid #d2fdff;
+  color: white;
+  cursor: pointer;
+}
+
+#message-form > div > input.button:active {
+  background-color: #dd855d;
+}
+
+#buttons-container {
+  margin-bottom: 1rem;
+}
+
+#buttons-container > button {
+  font-size: 0.8rem;
+}
+
+#messages-container > .message {
+  background-color: #303c6c;
+  border-radius: 1rem;
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+#messages-container > .message:not(:first-of-type) {
+  margin-top: 0.5rem;
+}
