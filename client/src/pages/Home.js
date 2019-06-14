@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
@@ -9,39 +9,49 @@ import {
   pullPostsFailure
 } from '../actions';
 
-const Home = ({
-  posts,
-  pullPostsRequest
-}) => {
-  pullPostsRequest();
+class Home extends Component {
+  componentDidMount() {
+    this.props.pullPostsRequest();
+  }
 
-  const postList = posts.map(post => {
+  render() {
+    const {
+      posts,
+      isLoading,
+      pullPostsRequest
+    } = this.props;
+
+    const postList = posts.sort((a, b) => b.id - a.id).map(post => {
+      return (
+        <Post
+          key={post.id}
+          id={post.id}
+          title={post.title}
+          content={post.content}
+          edited={post.edited}
+          upvotes={post.upvotes}
+        />
+      );
+    });
+
     return (
-      <Post
-        key={post.id}
-        title={post.title}
-        content={post.content}
-        upvotes={post.upvotes}
-      />
-    );
-  });
-
-  return (
-    <div id="home">
-      <Navbar />
-      <div>
-        <Input />
+      <div id="home">
+        <Navbar />
         <div>
-          {postList}
+          <Input />
+          <div>
+            {isLoading ? <div>Loading...</div> : postList}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
-    posts: state.wall.posts
+    posts: state.wall.posts,
+    isLoading: state.wall.isLoading
   };
 };
 
