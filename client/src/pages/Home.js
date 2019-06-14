@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import Post from '../components/Post';
-import {
-  pullPostsRequest,
-  pullPostsSuccess,
-  pullPostsFailure
-} from '../actions';
+import { mapStateToPropsHome, mapDispatchToPropsHome } from '../reduxMaps';
 
 class Home extends Component {
   componentDidMount() {
@@ -48,26 +44,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    posts: state.wall.posts,
-    isLoading: state.wall.isLoading
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    pullPostsRequest: async () => {
-      dispatch(pullPostsRequest());
-      const response = await fetch('/api/posts');
-      if (response.ok) {
-        const posts = await response.json();
-        dispatch(pullPostsSuccess(posts));
-      } else {
-        dispatch(pullPostsFailure());
-      }
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToPropsHome, mapDispatchToPropsHome)(Home);

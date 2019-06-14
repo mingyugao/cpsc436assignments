@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  pullPostsRequest,
-  pullPostsSuccess,
-  pullPostsFailure
-} from '../actions';
+import { mapStateToPropsPost, mapDispatchToPropsPost } from '../reduxMaps';
 
 const Post = ({
   id,
@@ -23,28 +19,4 @@ const Post = ({
   </div>
 );
 
-const mapStateToProps = state => {
-  return {};
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    deletePostRequest: async id => {
-      await fetch('/api/posts/delete', {
-        method: 'delete',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ id })
-      });
-      dispatch(pullPostsRequest());
-      const response = await fetch('/api/posts');
-      if (response.ok) {
-        const posts = await response.json();
-        dispatch(pullPostsSuccess(posts));
-      } else {
-        dispatch(pullPostsFailure());
-      }
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToPropsPost, mapDispatchToPropsPost)(Post);

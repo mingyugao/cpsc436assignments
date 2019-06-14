@@ -1,15 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  onChangeTitle,
-  onChangeContent,
-  submitPostRequest,
-  submitPostSuccess,
-  submitPostFailure,
-  pullPostsRequest,
-  pullPostsSuccess,
-  pullPostsFailure
-} from '../actions';
+import { mapStateToPropsInput, mapDispatchToPropsInput } from '../reduxMaps';
 
 const Input = ({
   title,
@@ -17,7 +8,7 @@ const Input = ({
   allowEdit,
   onChangeTitle,
   onChangeContent,
-  submitPost
+  submitPostRequest
 }) => (
   <div className="input">
     <input
@@ -38,45 +29,9 @@ const Input = ({
       disabled={!allowEdit}
       type="button"
       value="Post"
-      onClick={() => submitPost({ title, content })}
+      onClick={() => submitPostRequest({ title, content })}
     />
   </div>
 );
 
-const mapStateToProps = state => {
-  return {
-    title: state.input.title,
-    content: state.input.content,
-    allowEdit: state.input.allowEdit
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onChangeTitle: title => dispatch(onChangeTitle(title)),
-    onChangeContent: content => dispatch(onChangeContent(content)),
-    submitPost: async post => {
-      dispatch(submitPostRequest());
-      const submitResponse = await fetch('/api/posts/new', {
-        method: 'post',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(post)
-      });
-      if (submitResponse.ok) {
-        dispatch(submitPostSuccess());
-        dispatch(pullPostsRequest());
-        const pullResponse = await fetch('/api/posts');
-        if (pullResponse.ok) {
-          const posts = await pullResponse.json();
-          dispatch(pullPostsSuccess(posts));
-        } else {
-          dispatch(pullPostsFailure());
-        }
-      } else {
-        dispatch(submitPostFailure());
-      }
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Input);
+export default connect(mapStateToPropsInput, mapDispatchToPropsInput)(Input);
