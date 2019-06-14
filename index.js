@@ -15,10 +15,20 @@ function* idGenerator() {
 }
 
 const id = idGenerator();
+
 const data = {
   posts: []
 };
-const addPost = post => {
+
+const getPost = id => {
+  const index = data.posts.findIndex(e => e.id === id);
+  if (index >= 0 && index < data.posts.length) {
+    return data.posts[index];
+  }
+  return null;
+};
+
+const createPost = post => {
   const newPost = {
     ...post,
     id: id.next().value,
@@ -27,29 +37,40 @@ const addPost = post => {
   };
   data.posts.push(newPost);
 };
+
 const deletePost = id => {
   const index = data.posts.findIndex(e => e.id === id);
   if (index >= 0) data.posts.splice(index, 1);
 };
 
-app.get('/api/posts', (req, res) => {
+app.get('/posts', (req, res) => {
   res.json(data.posts);
 });
 
-app.post('/api/posts/new', (req, res) => {
+app.post('/posts', (req, res) => {
   const newPost = req.body;
-  addPost(newPost);
-  res.json(newPost);
+  createPost(newPost);
+  res.status(201).json(newPost);
 });
 
-app.delete('/api/posts/delete', (req, res) => {
-  const { id } = req.body;
-  deletePost(id);
+app.delete('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  deletePost(Number(id));
   res.sendStatus(200);
+});
+
+app.get('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  const post = getPost(Number(id));
+  if (post) {
+    res.json(post)
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
-  addPost({ title: 'First post', content: 'Testing posts...' });
-  addPost({ title: 'Second post', content: 'More testing!' });
+  createPost({ title: 'First post', content: 'Testing posts...' });
+  createPost({ title: 'Second post', content: 'More testing!' });
 });

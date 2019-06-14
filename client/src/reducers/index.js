@@ -28,6 +28,31 @@ const wallReducer = (
   }
 };
 
+const editPostModalReducer = (
+  state = {
+    isOpen: false,
+    title: '',
+    content: ''
+  },
+  action
+) => {
+  switch (action.type) {
+    case 'OPEN_EDIT_POST_MODAL':
+      return {
+        isOpen: true,
+        ...action.payload
+      };
+    case 'CLOSE_EDIT_POST_MODAL':
+      return {
+        isOpen: false,
+        title: '',
+        content: ''
+      };
+    default:
+      return state;
+  }
+};
+
 const inputReducer = (
   state = {
     title: '',
@@ -70,5 +95,6 @@ const inputReducer = (
 
 export default combineReducers({
   wall: wallReducer,
+  editPostModal: editPostModalReducer,
   input: inputReducer
 });

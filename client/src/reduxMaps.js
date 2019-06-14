@@ -2,7 +2,7 @@ import * as actions from './actions';
 
 const pullPosts = async dispatch => {
   dispatch(actions.pullPostsRequest());
-  const response = await fetch('/api/posts');
+  const response = await fetch('/posts');
   if (response.ok) {
     const posts = await response.json();
     dispatch(actions.pullPostsSuccess(posts));
@@ -11,7 +11,7 @@ const pullPosts = async dispatch => {
   }
 };
 
-export const mapStateToProps = state => {
+export const mapStateToPropsInput = state => {
   return {
     title: state.input.title,
     content: state.input.content,
@@ -19,13 +19,13 @@ export const mapStateToProps = state => {
   };
 };
 
-export const mapDispatchToProps = dispatch => {
+export const mapDispatchToPropsInput = dispatch => {
   return {
     onChangeTitle: title => dispatch(actions.onChangeTitle(title)),
     onChangeContent: content => dispatch(actions.onChangeContent(content)),
     submitPostRequest: async post => {
       dispatch(actions.submitPostRequest());
-      const response = await fetch('/api/posts/new', {
+      const response = await fetch('/posts', {
         method: 'post',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(post)
@@ -46,11 +46,16 @@ export const mapStateToPropsPost = state => {
 
 export const mapDispatchToPropsPost = dispatch => {
   return {
+    openEditPostModal: async id => {
+      const response = await fetch(`/posts/${id}`);
+      if (response.ok) {
+        const { title, content } = await response.json();
+        dispatch(actions.openEditPostModal({ title, content }));
+      }
+    },
     deletePostRequest: async id => {
-      await fetch('/api/posts/delete', {
-        method: 'delete',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ id })
+      await fetch(`/posts/${id}`, {
+        method: 'delete'
       });
       await pullPosts(dispatch);
     }

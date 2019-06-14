@@ -8,6 +8,7 @@ const Post = ({
   content,
   edited,
   upvotes,
+  openEditPostModal,
   deletePostRequest
 }) => (
   <div className="post">
@@ -15,6 +16,7 @@ const Post = ({
     <div>{content}</div>
     {edited ? <div>edited</div> : ''}
     <div>{upvotes}</div>
+    <button onClick={() => openEditPostModal(id)}>Edit</button>
     <button onClick={() => deletePostRequest(id)}>Delete</button>
   </div>
 );

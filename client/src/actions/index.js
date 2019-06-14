@@ -48,3 +48,16 @@ export const submitPostFailure = () => {
     type: 'SUBMIT_POST_FAILURE'
   };
 };
+
+export const openEditPostModal = ({ title, content }) => {
+  return {
+    type: 'OPEN_EDIT_POST_MODAL',
+    payload: ''
+  };
+};
+
+export const closeEditPostModal = () => {
+  return {
+    type: 'CLOSE_EDIT_POST_MODAL'
+  };
+};
