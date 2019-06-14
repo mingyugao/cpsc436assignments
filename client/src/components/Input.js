@@ -5,28 +5,28 @@ import { mapStateToPropsInput, mapDispatchToPropsInput } from '../reduxMaps';
 const Input = ({
   title,
   content,
-  allowEdit,
+  isEditable,
   onChangeTitle,
   onChangeContent,
   submitPostRequest
 }) => (
   <div className="input">
     <input
-      disabled={!allowEdit}
+      disabled={!isEditable}
       type="text"
       value={title}
       onChange={e => onChangeTitle(e.target.value)}
       placeholder="Title"
     />
     <input
-      disabled={!allowEdit}
+      disabled={!isEditable}
       type="text"
       value={content}
       onChange={e => onChangeContent(e.target.value)}
       placeholder="Message"
     />
     <input
-      disabled={!allowEdit}
+      disabled={!isEditable}
       type="button"
       value="Post"
       onClick={() => submitPostRequest({ title, content })}

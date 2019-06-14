@@ -38,6 +38,17 @@ const createPost = post => {
   data.posts.push(newPost);
 };
 
+const editPost = (id, title, content) => {
+  const index = data.posts.findIndex(e => e.id === id);
+  if (index >= 0 && index < data.posts.length) {
+    data.posts[index].title = title;
+    data.posts[index].content = content;
+    data.posts[index].edited = true;
+    return true;
+  }
+  return false;
+};
+
 const deletePost = id => {
   const index = data.posts.findIndex(e => e.id === id);
   if (index >= 0) data.posts.splice(index, 1);
@@ -53,12 +64,6 @@ app.post('/posts', (req, res) => {
   res.status(201).json(newPost);
 });
 
-app.delete('/posts/:id', (req, res) => {
-  const { id } = req.params;
-  deletePost(Number(id));
-  res.sendStatus(200);
-});
-
 app.get('/posts/:id', (req, res) => {
   const { id } = req.params;
   const post = getPost(Number(id));
@@ -67,6 +72,23 @@ app.get('/posts/:id', (req, res) => {
   } else {
     res.sendStatus(404);
   }
+});
+
+app.put('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const response = editPost(Number(id), title, content);
+  if (response) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
+app.delete('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  deletePost(Number(id));
+  res.sendStatus(200);
 });
 
 app.listen(port, () => {

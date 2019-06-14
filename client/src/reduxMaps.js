@@ -11,11 +11,46 @@ const pullPosts = async dispatch => {
   }
 };
 
+export const mapStateToPropsEditPostModal = state => {
+  return {
+    isOpen: state.editPostModal.isOpen,
+    id: state.editPostModal.id,
+    title: state.editPostModal.title,
+    content: state.editPostModal.content,
+    isEditable: state.editPostModal.isEditable
+  };
+};
+
+export const mapDispatchToPropsEditPostModal = dispatch => {
+  return {
+    onChangeTitle: title => dispatch(actions.editPostModalOnChangeTitle(title)),
+    onChangeContent: content => {
+      dispatch(actions.editPostModalOnChangeContent(content));
+    },
+    closeEditPostModal: () => dispatch(actions.closeEditPostModal()),
+    editPostRequest: async ({ id, title, content }) => {
+      dispatch(actions.editPostRequest());
+      const response = await fetch(`/posts/${id}`, {
+        method: 'put',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ title, content })
+      });
+      if (response.ok) {
+        dispatch(actions.editPostSuccess());
+        dispatch(actions.closeEditPostModal());
+        pullPosts(dispatch);
+      } else {
+        dispatch(actions.editPostFailure());
+      }
+    }
+  };
+};
+
 export const mapStateToPropsInput = state => {
   return {
     title: state.input.title,
     content: state.input.content,
-    allowEdit: state.input.allowEdit
+    isEditable: state.input.isEditable
   };
 };
 
@@ -49,8 +84,8 @@ export const mapDispatchToPropsPost = dispatch => {
     openEditPostModal: async id => {
       const response = await fetch(`/posts/${id}`);
       if (response.ok) {
-        const { title, content } = await response.json();
-        dispatch(actions.openEditPostModal({ title, content }));
+        const { id, title, content } = await response.json();
+        dispatch(actions.openEditPostModal({ id, title, content }));
       }
     },
     deletePostRequest: async id => {

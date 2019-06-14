@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import Post from '../components/Post';
+import EditPostModal from '../components/EditPostModal';
 import { mapStateToPropsHome, mapDispatchToPropsHome } from '../reduxMaps';
 
 class Home extends Component {
@@ -11,11 +12,7 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      posts,
-      isLoading,
-      pullPostsRequest
-    } = this.props;
+    const { posts, isLoading } = this.props;
 
     const postList = posts.sort((a, b) => b.id - a.id).map(post => {
       return (
@@ -39,6 +36,7 @@ class Home extends Component {
             {isLoading ? <div>Loading...</div> : postList}
           </div>
         </div>
+        <EditPostModal />
       </div>
     );
   }
