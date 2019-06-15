@@ -11,6 +11,7 @@ const Input = ({
   submitPostRequest
 }) => (
   <div className="input">
+    <div>Create a post</div>
     <input
       disabled={!isEditable}
       type="text"
@@ -18,19 +19,18 @@ const Input = ({
       onChange={e => onChangeTitle(e.target.value)}
       placeholder="Title"
     />
-    <input
+    <textarea
       disabled={!isEditable}
-      type="text"
+      cols="40"
+      rows="5"
       value={content}
       onChange={e => onChangeContent(e.target.value)}
-      placeholder="Message"
-    />
-    <input
-      disabled={!isEditable}
-      type="button"
-      value="Post"
+      placeholder="Text"
+    ></textarea>
+    <button
+      disabled={!isEditable || !title || !content}
       onClick={() => submitPostRequest({ title, content })}
-    />
+    >POST</button>
   </div>
 );
 

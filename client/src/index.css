@@ -1,8 +1,53 @@
 body {
-  background-color: white;
+  background-color: lightgrey;
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+}
+input:focus, textarea:focus {
+  outline: none;
+}
+.input {
+  background-color: white;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem 1rem;
+  width: 40rem;
+}
+.input > input, .input > textarea, .input > button {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+.input > input, .input > textarea {
+  border: 1px solid lightgrey;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+.input > textarea {
+  resize: vertical;
+}
+.input > input:focus, .input > textarea:focus {
+  border-color: black;
+}
+.input > button {
+  align-self: flex-end;
+  background-color: dodgerblue;
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  height: 2rem;
+  line-height: 2rem;
+  width: 5rem;
+}
+.input > button:hover {
+  opacity: 0.8;
+}
+.input > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 .navbar {
   align-items: center;
@@ -10,8 +55,12 @@ body {
   border-bottom: 1px solid lightgrey;
   display: flex;
   height: 3rem;
+  left: 0;
   text-align: center;
-  padding: 0 1rem;
+  top: 0;
+  padding: 0 10rem;
+  position: fixed;
+  width: 100%;
 }
 .navbar > a {
   color: darkgrey;
@@ -27,4 +76,12 @@ body {
 .navbar > a:not(.selected):hover {
   color: grey;
 }
-
+#home {
+  min-height: 100%;
+}
+#home > div:nth-of-type(2) {
+  margin: 4rem 16rem;
+}
+#about > div:nth-of-type(2) {
+  margin: 4rem 16rem;
+}
