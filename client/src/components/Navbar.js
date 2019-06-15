@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 const Navbar = () => (
   <div className="navbar">
-    <NavLink to="/">Home</NavLink>
-    <NavLink to="/about">About</NavLink>
+    <NavLink activeClassName="selected" exact to="/">Home</NavLink>
+    <NavLink activeClassName="selected" to="/about">About</NavLink>
   </div>
 );
 

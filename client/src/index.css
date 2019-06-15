@@ -1,0 +1,30 @@
+body {
+  background-color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  height: 3rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+.navbar > a {
+  color: darkgrey;
+  line-height: 3rem;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  width: 4rem;
+}
+.navbar > a.selected {
+  border-bottom: 1px solid dodgerblue;
+  color: dodgerblue;
+}
+.navbar > a:not(.selected):hover {
+  color: grey;
+}
+

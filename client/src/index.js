@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import reducers from './reducers';
 import Home from './pages/Home';
 import About from './pages/About';
-import './index.less';
+import './index.css';
 
 ReactDOM.render(
   <Provider store={createStore(reducers)}>
