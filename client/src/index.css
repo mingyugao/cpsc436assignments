@@ -1,5 +1,5 @@
 body {
-  background-color: lightgrey;
+  background-color: white;
   font-family: sans-serif;
   margin: 0;
   padding: 0;
@@ -9,11 +9,12 @@ input:focus, textarea:focus {
 }
 .input {
   background-color: white;
+  border: 1px solid lightgrey;
   border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
   padding: 0.8rem 1rem;
-  width: 40rem;
+  width: 38rem;
 }
 .input > input, .input > textarea, .input > button {
   font-size: 0.8rem;
@@ -32,7 +33,7 @@ input:focus, textarea:focus {
 }
 .input > button {
   align-self: flex-end;
-  background-color: dodgerblue;
+  background-color: #ff5e5b;
   border: none;
   border-radius: 0.3rem;
   color: white;
@@ -61,6 +62,7 @@ input:focus, textarea:focus {
   padding: 0 10rem;
   position: fixed;
   width: 100%;
+  z-index: 999;
 }
 .navbar > a {
   color: darkgrey;
@@ -70,17 +72,71 @@ input:focus, textarea:focus {
   width: 4rem;
 }
 .navbar > a.selected {
-  border-bottom: 1px solid dodgerblue;
-  color: dodgerblue;
+  border-bottom: 1px solid #ff5e5b;
+  color: #ff5e5b;
 }
 .navbar > a:not(.selected):hover {
   color: grey;
+}
+.post {
+  background-color: white;
+  padding: 0.8rem 0.8rem;
+}
+.post > h3 {
+  cursor: pointer;
+  margin: 0;
+}
+.post:first-of-type {
+  border: 1px solid lightgrey;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+.post:not(:first-of-type) {
+  border: 1px solid lightgrey;
+  border-top: none;
+}
+.post:last-of-type {
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+.post > div {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+.post > div:last-of-type {
+  margin-bottom: 0.5rem;
+}
+.post > div:nth-of-type(1) {
+  font-size: 1rem;
+}
+.post > div:nth-of-type(2) {
+  color: darkgrey;
+  font-style: italic;
+}
+.post > span {
+  font-size: 0.8rem;
+}
+.post > span:not(:first-of-type) {
+  margin-left: 0.5rem;
+}
+.post > span > button {
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}
+.post > span > button:hover {
+  color: #ff5e5b;
 }
 #home {
   min-height: 100%;
 }
 #home > div:nth-of-type(2) {
   margin: 4rem 16rem;
+}
+#home > div:nth-of-type(2) > div:nth-of-type(2) {
+  margin-top: 1rem;
+  width: 40rem;
 }
 #about > div:nth-of-type(2) {
   margin: 4rem 16rem;
