@@ -54,6 +54,15 @@ const deletePost = id => {
   if (index >= 0) data.posts.splice(index, 1);
 };
 
+const votePost = (id, vote) => {
+  const index = data.posts.findIndex(e => e.id === id);
+  if (index >= 0 && index < data.posts.length) {
+    data.posts[index].upvotes += vote;
+    return true;
+  }
+  return false;
+};
+
 app.get('/posts', (req, res) => {
   res.json(data.posts);
 });
@@ -78,6 +87,16 @@ app.put('/posts/:id', (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
   const response = editPost(Number(id), title, content);
+  if (response) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
+app.put('/posts/:id/votes', (req, res) => {
+  const { id } = req.params;
+  const response = votePost(Number(id), 1);
   if (response) {
     res.sendStatus(200);
   } else {
