@@ -54,6 +54,7 @@ button, input:focus, textarea:focus {
   width: 5rem;
 }
 .edit-post-modal button:nth-of-type(1) {
+  background-color: white;
   border: 1px solid darkgrey;
   color: grey;
   line-height: 1.9rem;
@@ -188,6 +189,7 @@ button, input:focus, textarea:focus {
   margin-left: 0.5rem;
 }
 .post > span > button {
+  background-color: white;
   border: none;
   cursor: pointer;
   font-size: inherit;
