@@ -37,7 +37,7 @@ const EditPostModal = ({
             onChange={e => onChangeContent(e.target.value)}
           ></textarea>
           <div>
-            <button onClick={() => closeEditPostModal()}>CANCEL</button>
+            <button onClick={() => closeEditPostModal()}>Cancel</button>
             <button
               disabled={!isEditable || !title || !content}
               onClick={() => editPostRequest({ id, title, content })}

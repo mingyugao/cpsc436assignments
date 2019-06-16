@@ -5,12 +5,21 @@ import { mapStateToPropsPost, mapDispatchToPropsPost } from '../reduxMaps';
 class Post extends Component {
   constructor(props) {
     super(props);
-    this.state = { isExpanded: true };
+    this.state = {
+      isExpanded: true,
+      upvotes: this.props.upvotes
+    };
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.upvotePost = this.upvotePost.bind(this);
   }
 
   toggleExpanded() {
     this.setState({ isExpanded: !this.state.isExpanded });
+  }
+
+  upvotePost() {
+    fetch(`posts/${this.props.id}/votes`, { method: 'put' });
+    this.setState({ upvotes: this.state.upvotes + 1 });
   }
 
   render() {
@@ -19,10 +28,11 @@ class Post extends Component {
       title,
       content,
       edited,
-      upvotes,
+      // upvotes,
       openEditPostModal,
       deletePostRequest
     } = this.props;
+    const { upvotes } = this.state;
 
     return this.state.isExpanded
       ? (
@@ -31,6 +41,9 @@ class Post extends Component {
           <div>{content}</div>
           {edited ? <div>(Edited)</div> : <div></div>}
           <div>{upvotes} upvotes</div>
+          <span>
+            [<button onClick={() => this.upvotePost()}>Upvote</button>]
+          </span>
           <span>
             [<button onClick={() => openEditPostModal(id)}>Edit</button>]
           </span>
