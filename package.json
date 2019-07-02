@@ -1,0 +1,20 @@
+{
+  "name": "a3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mingyugao/cpsc436assignments.git"
+  },
+  "author": "mingyugao",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.6.2"
+  }
+}
