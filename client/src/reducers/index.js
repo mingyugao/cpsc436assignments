@@ -15,6 +15,7 @@ const wallReducer = (
       };
     case 'PULL_POSTS_SUCCESS':
       return {
+        ...state,
         posts: action.payload,
         isLoading: false
       };
@@ -22,6 +23,31 @@ const wallReducer = (
       return {
         ...state,
         isLoading: false
+      };
+    case 'SUBMIT_POST_SUCCESS':
+      return {
+        ...state,
+        posts: [
+          ...state.posts,
+          action.payload
+        ]
+      };
+    case 'EDIT_POST_SUCCESS':
+      const { id, title, content } = action.payload;
+      return {
+        ...state,
+        posts: state.posts.map(post => {
+          return post._id === id
+            ? { ...post, title, content, edited: true }
+            : post;
+        })
+      };
+    case 'DELETE_POST':
+      return {
+        ...state,
+        posts: state.posts.filter(post => {
+          return post._id !== action.payload;
+        })
       };
     default:
       return state;
@@ -47,6 +73,7 @@ const editPostModalReducer = (
       };
     case 'CLOSE_EDIT_POST_MODAL':
       return {
+        ...state,
         isOpen: false,
         id: null,
         title: '',
@@ -69,7 +96,14 @@ const editPostModalReducer = (
         isEditable: false
       };
     case 'EDIT_POST_SUCCESS':
-      return state;
+      return {
+        ...state,
+        isOpen: false,
+        id: null,
+        title: '',
+        content: '',
+        isEditable: true
+      };
     case 'EDIT_POST_FAILURE':
       return {
         ...state,

@@ -1,16 +1,5 @@
 import * as actions from './actions';
 
-const pullPosts = async dispatch => {
-  dispatch(actions.pullPostsRequest());
-  const response = await fetch('/posts');
-  if (response.ok) {
-    const posts = await response.json();
-    dispatch(actions.pullPostsSuccess(posts));
-  } else {
-    dispatch(actions.pullPostsFailure());
-  }
-};
-
 export const mapStateToPropsEditPostModal = state => {
   return {
     isOpen: state.editPostModal.isOpen,
@@ -36,9 +25,7 @@ export const mapDispatchToPropsEditPostModal = dispatch => {
         body: JSON.stringify({ title, content })
       });
       if (response.ok) {
-        dispatch(actions.editPostSuccess());
-        dispatch(actions.closeEditPostModal());
-        pullPosts(dispatch);
+        dispatch(actions.editPostSuccess({ id, title, content }));
       } else {
         dispatch(actions.editPostFailure());
       }
@@ -66,8 +53,8 @@ export const mapDispatchToPropsInput = dispatch => {
         body: JSON.stringify(post)
       });
       if (response.ok) {
-        dispatch(actions.submitPostSuccess());
-        await pullPosts(dispatch);
+        const post = await response.json();
+        dispatch(actions.submitPostSuccess(post));
       } else {
         dispatch(actions.submitPostFailure());
       }
@@ -81,20 +68,14 @@ export const mapStateToPropsPost = state => {
 
 export const mapDispatchToPropsPost = dispatch => {
   return {
-    openEditPostModal: async id => {
-      const response = await fetch(`/posts/${id}`);
-      if (response.ok) {
-        const parsed = await response.json();
-        const id = parsed._id;
-        const { title, content } = parsed;
-        dispatch(actions.openEditPostModal({ id, title, content }));
-      }
+    openEditPostModal: id => {
+      dispatch(actions.openEditPostModal(id));
     },
     deletePostRequest: async id => {
       await fetch(`/posts/${id}`, {
         method: 'delete'
       });
-      await pullPosts(dispatch);
+      dispatch(actions.deletePost(id));
     }
   };
 };
@@ -109,7 +90,14 @@ export const mapStateToPropsHome = state => {
 export const mapDispatchToPropsHome = dispatch => {
   return {
     pullPostsRequest: async () => {
-      await pullPosts(dispatch);
+      dispatch(actions.pullPostsRequest());
+      const response = await fetch('/posts');
+      if (response.ok) {
+        const posts = await response.json();
+        dispatch(actions.pullPostsSuccess(posts));
+      } else {
+        dispatch(actions.pullPostsFailure());
+      }
     }
   };
 };

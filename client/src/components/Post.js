@@ -45,7 +45,9 @@ class Post extends Component {
             [<button onClick={() => this.upvotePost()}>Upvote</button>]
           </span>
           <span>
-            [<button onClick={() => openEditPostModal(id)}>Edit</button>]
+            [<button onClick={() => openEditPostModal({ id, title, content })}>
+              Edit
+            </button>]
           </span>
           <span>
             [<button onClick={() => deletePostRequest(id)}>Delete</button>]

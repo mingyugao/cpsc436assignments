@@ -14,10 +14,14 @@ class Home extends Component {
   render() {
     const { posts, isLoading } = this.props;
 
-    const postList = posts.reverse().map(post => {
+    const postList = posts.sort((a, b) => {
+      return a._id < b._id
+        ? 1
+        : -1;
+    }).map((post, index) => {
       return (
         <Post
-          key={post._id}
+          key={index}
           id={post._id}
           title={post.title}
           content={post.content}

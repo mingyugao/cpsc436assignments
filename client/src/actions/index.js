@@ -37,9 +37,10 @@ export const submitPostRequest = () => {
   };
 };
 
-export const submitPostSuccess = () => {
+export const submitPostSuccess = post => {
   return {
-    type: 'SUBMIT_POST_SUCCESS'
+    type: 'SUBMIT_POST_SUCCESS',
+    payload: post
   };
 };
 
@@ -82,14 +83,22 @@ export const editPostRequest = () => {
   };
 };
 
-export const editPostSuccess = () => {
+export const editPostSuccess = post => {
   return {
-    type: 'EDIT_POST_SUCCESS'
+    type: 'EDIT_POST_SUCCESS',
+    payload: post
   };
 };
 
 export const editPostFailure = () => {
   return {
     type: 'EDIT_POST_FAILURE'
+  };
+};
+
+export const deletePost = id => {
+  return {
+    type: 'DELETE_POST',
+    payload: id
   };
 };
