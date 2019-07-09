@@ -1,0 +1,220 @@
+body {
+  background-color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+button, input:focus, textarea:focus {
+  outline: none;
+}
+.edit-post-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+.edit-post-modal > div {
+  background-color: white;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  padding: 0.8rem 1rem;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -80%);
+  width: 36rem;
+  z-index: 3;
+}
+.edit-post-modal input, .edit-post-modal textarea, .edit-post-modal button {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+.edit-post-modal input, .edit-post-modal textarea {
+  border: 1px solid lightgrey;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+.edit-post-modal textarea {
+  resize: none;
+}
+.edit-post-modal input:focus, .edit-post-modal textarea:focus {
+  border-color: black;
+}
+.edit-post-modal > div > div:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
+}
+.edit-post-modal button {
+  border-radius: 0.3rem;
+  cursor: pointer;
+  height: 2rem;
+  width: 5rem;
+}
+.edit-post-modal button:nth-of-type(1) {
+  background-color: white;
+  border: 1px solid darkgrey;
+  color: grey;
+  line-height: 1.9rem;
+}
+.edit-post-modal button:nth-of-type(2) {
+  background-color: #ff5e5b;
+  border: none;
+  color: white;
+  font-weight: bold;
+  line-height: 2rem;
+}
+.edit-post-modal button:nth-of-type(1):hover {
+  border-color: black;
+  color: black;
+}
+.edit-post-modal button:nth-of-type(2):hover {
+  opacity: 0.8;
+}
+.edit-post-modal button:nth-of-type(2):disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.input {
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem 1rem;
+}
+.input > input, .input > textarea, .input > button {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+.input > input, .input > textarea {
+  border: 1px solid lightgrey;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+.input > textarea {
+  resize: vertical;
+}
+.input > input:focus, .input > textarea:focus {
+  border-color: black;
+}
+.input > button {
+  align-self: flex-end;
+  background-color: #ff5e5b;
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  height: 2rem;
+  line-height: 2rem;
+  width: 5rem;
+}
+.input > button:hover {
+  opacity: 0.8;
+}
+.input > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.navbar {
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  height: 3rem;
+  left: 0;
+  text-align: center;
+  top: 0;
+  padding: 0 10rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.navbar > a {
+  color: darkgrey;
+  line-height: 3rem;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  width: 4rem;
+}
+.navbar > a.selected {
+  border-bottom: 1px solid #ff5e5b;
+  color: #ff5e5b;
+}
+.navbar > a:not(.selected):hover {
+  color: grey;
+}
+.post {
+  background-color: white;
+  padding: 0.8rem 0.8rem;
+}
+.post > h3 {
+  cursor: pointer;
+  margin: 0;
+}
+.post:first-of-type {
+  border: 1px solid lightgrey;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+.post:not(:first-of-type) {
+  border: 1px solid lightgrey;
+  border-top: none;
+}
+.post:last-of-type {
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+.post > div {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+.post > div:last-of-type {
+  margin-bottom: 0.5rem;
+}
+.post > div:nth-of-type(1) {
+  font-size: 1rem;
+}
+.post > div:nth-of-type(2) {
+  color: darkgrey;
+  font-style: italic;
+}
+.post > span {
+  font-size: 0.8rem;
+}
+.post > span:not(:first-of-type) {
+  margin-left: 0.5rem;
+}
+.post > span > button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}
+.post > span > button:hover {
+  color: #ff5e5b;
+}
+#home {
+  min-height: 100%;
+}
+#home > div:nth-of-type(2) {
+  left: 50%;
+  margin: 4rem 0 2rem;
+  position: absolute;
+  transform: translate(-80%, 0);
+  width: 36rem;
+}
+#home > div:nth-of-type(2) > div:nth-of-type(2) {
+  margin-top: 1rem;
+}
+#about > div:nth-of-type(2) {
+  left: 50%;
+  margin: 4rem 0 2rem;
+  position: absolute;
+  transform: translate(-80%, 0);
+  width: 36rem;
+}
