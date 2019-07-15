@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const postsRouter = require('./routes/posts');
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -13,8 +13,12 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/posts', postsRouter);
 
 const dbname = 'cpsc436assignment';
-const url = 'mongodb://localhost:27017';
-mongoose.connect(`${url}/${dbname}`, { useNewUrlParser: true });
+const url = 'mongodb+srv://dbUser:dbUserPassword@cluster0-xkedn.mongodb.net/test?retryWrites=true&w=majority';
+try {
+  mongoose.connect(`${url}/${dbname}`, { useNewUrlParser: true });
+} catch (err) {
+  console.log(err);
+}
 const connection = mongoose.connection;
 
 connection.once('open', () => {
